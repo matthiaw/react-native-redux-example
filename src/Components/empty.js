@@ -4,16 +4,15 @@ import Styles from "./../../App.scss";
 
 export default class Settings extends Component {
   static navigationOptions = {
-    title: "Einstellungen",
+    title: "Leer",
     headerTintColor: Styles.circleadHeader.color,
     headerStyle: {
-      height: Styles.circleadHeader.height,
       backgroundColor: Styles.circleadHeader.backgroundColor
     }
   };
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "orange" }}>
+      <View style={{ flex: 1, backgroundColor: "blue" }}>
         <Text>{this.props.navigation.state.params.name}</Text>
       </View>
     );

@@ -2,10 +2,12 @@ $circleadHeaderBackgroundColor: #5d5d5d;
 $circleadHeaderFontColor: #ffffff;
 $circleadMenuItemTitleFontColor: #444;
 $circleadMenuItemDescriptionFontColor: #999;
+$circleadHeaderHeight: 50;
 
 .circleadHeader {
   color: $circleadHeaderFontColor;
   backgroundColor: $circleadHeaderBackgroundColor;
+  height: $circleadHeaderHeight;
 }
 
 .circleadMainMenuItem {

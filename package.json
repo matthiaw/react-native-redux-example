@@ -16,12 +16,13 @@
 		"react-native-remote-svg": "^1.0.1",
 		"react-navigation": "^1.0.0-beta.27",
 		"react-redux": "^5.0.6",
-		"redux": "^3.7.2"
+		"redux": "^3.7.2",
+		"uuid": "^3.2.1"
 	},
 	"devDependencies": {
-		"react-native-sass-transformer": "^1.0.3",
-		"node-sass": "^4.7.2",
 		"jest-expo": "23.0.0",
+		"node-sass": "^4.7.2",
+		"react-native-sass-transformer": "^1.0.3",
 		"react-native-scripts": "1.9.0",
 		"react-test-renderer": "16.0.0"
 	},

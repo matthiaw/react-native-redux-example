@@ -3,6 +3,8 @@ import { Platform } from "react-native";
 import Home from "../Components/home";
 import Roles from "../Components/roles";
 import Settings from "../Components/settings";
+import Empty from "../Components/empty";
+import Role from "../Components/role";
 
 const navigator = StackNavigator(
 {
@@ -14,6 +16,12 @@ const navigator = StackNavigator(
   },
   settings: {
     screen: Settings
+  },
+  empty: {
+    screen: Empty
+  },
+  role: {
+    screen: Role
   }
  },
  {
