@@ -1,52 +1,40 @@
-$circleadHeaderBackgroundColor: #5d5d5d;
-$circleadHeaderFontColor: #ffffff;
-$circleadMenuItemTitleFontColor: #444;
-$circleadMenuItemDescriptionFontColor: #999;
-$circleadHeaderHeight: 50;
+$ci_primaryColor: #cccccc;
+$ci_primaryLightColor: lighten($ci_primaryColor, 50%);
+$ci_disabledColor: lighten($ci_primaryColor, 80%);
+$ci_backgroundColor: white;
+$ci_barColor: #A0A0A0;
+$ci_barTextColor: #FFFFFF;
+$ci_dividerColor: grey;
+$ci_textColor: black;
+$ci_placeholderColor: #EFEFF4;
+$ci_footnoteColor: #EFEFF4;
+$ci_footnoteBackgroundColor: #EFEFF4;
+$ci_positiveColor: green;
+$ci_itemTitleColor: #444;
+$ci_itemDescriptionColor: #999;
+$ci_headerHeight: 50;
 
-.circleadHeader {
-  color: $circleadHeaderFontColor;
-  backgroundColor: $circleadHeaderBackgroundColor;
-  height: $circleadHeaderHeight;
+.ci_Header {
+  color: $ci_barTextColor;
+  backgroundColor: $ci_barColor;
+  height: $ci_headerHeight;
 }
 
-.circleadMainMenuItem {
+.ci_itemBox {
   paddingHorizontal: 16;
   paddingVertical: 12;
-  backgroundColor: #fff;
+  backgroundColor: $ci_backgroundColor;
   borderBottomWidth: 1px;
-  borderBottomColor: #ddd;
+  borderBottomColor: $ci_primaryColor;
 }
 
-.circleadStatusBarUnderlay {
-  backgroundColor: $circleadHeaderBackgroundColor;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 20px;
-}
-.circleadMenuTitle {
+.ci_itemTitle {
   fontSize: 16;
   fontWeight: bold;
-  color: $circleadMenuItemTitleFontColor;
+  color: $ci_itemTitleColor;
 }
-.circleadMenuDescription {
+
+.ci_itemDescription {
   fontSize: 13;
-  color: $circleadMenuItemDescriptionFontColor;
-}
-.circleadBannerContainer {
-  backgroundColor: $circleadHeaderBackgroundColor;
-  paddingTop: 0;
-}
-.circleadBanner {
-  flexDirection: row;
-  alignItems: center;
-  padding: 16px;
-}
-.circleadBannerTitle {
-  fontSize: 18;
-  fontWeight: 200;
-  color: $circleadHeaderFontColor;
-  margin: 8px;
+  color: $ci_itemDescriptionColor;
 }

@@ -5,10 +5,10 @@ import Styles from "./../../App.scss";
 export default class Settings extends Component {
   static navigationOptions = {
     title: "Einstellungen",
-    headerTintColor: Styles.circleadHeader.color,
+    headerTintColor: Styles.ci_Header.color,
     headerStyle: {
-      height: Styles.circleadHeader.height,
-      backgroundColor: Styles.circleadHeader.backgroundColor
+      height: Styles.ci_Header.height,
+      backgroundColor: Styles.ci_Header.backgroundColor
     }
   };
   render() {

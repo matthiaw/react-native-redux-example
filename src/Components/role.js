@@ -4,7 +4,7 @@ import { NavigationActions, SafeAreaView } from "react-navigation";
 import Styles from "./../../App.scss";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const RoleScreen = ({ navigation, banner }) => (
+const RoleContent = ({ navigation, banner }) => (
   <View style={{ flex: 1, backgroundColor: "magenta" }}>
     <ScrollView style={{ flex: 1 }}>
       <Text>{banner}</Text>
@@ -13,7 +13,7 @@ const RoleScreen = ({ navigation, banner }) => (
 );
 
 const RoleView = ({ navigation }) => (
-  <RoleScreen
+  <RoleContent
     banner={`${navigation.state.params.mode === 'edit'
       ? 'Editiere '
       : ''} ID: (${navigation.state.params.id})`}
@@ -27,18 +27,18 @@ RoleView.navigationOptions = props => {
   const { params } = state;
   return {
     headerTitle: `${params.label}`,
+    headerTintColor: Styles.ci_Header.color,
+    headerStyle: {
+      height: Styles.ci_Header.height,
+      backgroundColor: Styles.ci_Header.backgroundColor
+    },
     // Render a button on the right side of the header.
     // When pressed switches the screen to edit mode.
-    headerTintColor: Styles.circleadHeader.color,
-    headerStyle: {
-      height: Styles.circleadHeader.height,
-      backgroundColor: Styles.circleadHeader.backgroundColor
-    },
     headerRight: (
         <FontAwesome
           name= {params.mode === 'edit' ? 'save' : 'edit'}
           size={18}
-          style={{ color: Styles.circleadHeader.color, paddingHorizontal: 5}}
+          style={{ color: Styles.ci_Header.color, paddingHorizontal: 5}}
           onPress={() => navigation.setParams({ mode: params.mode === 'edit' ? '' : 'edit' })}
         />
     ),
