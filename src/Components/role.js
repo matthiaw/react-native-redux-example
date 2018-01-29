@@ -83,11 +83,11 @@ class RoleView extends Component {
         viewMode =
           <View style={Styles.ci_formContainer}>
             <Text style={Styles.ci_formLabel}>ID</Text>
-            <Text>{params.id}</Text>
+            <Text style={Styles.ci_formText}>{params.id}</Text>
             <Text style={Styles.ci_formLabel}>Label</Text>
-            <Text>{params.label}</Text>
+            <Text style={Styles.ci_formText}>{params.label}</Text>
             <Text style={Styles.ci_formLabel}>Description</Text>
-            <Text>{params.description}</Text>
+            <Text style={Styles.ci_formText}>{params.description}</Text>
           </View>
       }
 
