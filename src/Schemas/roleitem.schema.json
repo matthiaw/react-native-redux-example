@@ -1,0 +1,38 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Database schema for a simple comment",
+  "type": "object",
+    "properties": {
+      "id": {
+        "$id": "/properties/id",
+        "type": "string",
+       "title": "The Id Schema",
+       "description": "An explanation about the purpose of this instance.",
+       "default": "",
+       "examples": [
+         "3ce12460-007d-11e8-beca-e9d3165058c2"
+       ]
+     },
+     "label": {
+       "$id": "/properties/label",
+       "type": "string",
+       "title": "The Label Schema",
+       "description": "An explanation about the purpose of this instance.",
+       "default": "",
+       "examples": [
+         "Rolle B"
+       ]
+     },
+     "description": {
+       "$id": "/properties/description",
+       "type": "string",
+       "title": "The Description Schema",
+       "description": "An explanation about the purpose of this instance.",
+       "default": "",
+       "examples": [
+         "Description of role B."
+      ]
+    }
+  }
+}

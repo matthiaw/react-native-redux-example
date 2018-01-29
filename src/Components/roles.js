@@ -46,6 +46,7 @@ export default class Roles extends Component {
             routeName: 'role',
             params: {
               label: `${item.label}`,
+              description: `${item.description}`,
               id: `${item.id}`
             }
           });

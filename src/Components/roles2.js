@@ -8,7 +8,7 @@ import { NavigationActions, SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 
 var db = Firebase.firestore();
-Firebase.firestore().enablePersistence();
+//Firebase.firestore().enablePersistence();
 
 const list = ['Loading...']
 
@@ -57,6 +57,7 @@ export default class Empty extends Component {
           routeName: 'role',
           params: {
             label: `${item.label}`,
+            description: `${item.description}`,
             id: `${item.id}`
           }
         });

@@ -18,6 +18,8 @@
 		"react-navigation": "^1.0.0-beta.27",
 		"react-redux": "^5.0.6",
 		"redux": "^3.7.2",
+		"tcomb-form-native": "^0.6.11",
+		"tcomb-json-schema": "^0.3.2",
 		"uuid": "^3.2.1"
 	},
 	"devDependencies": {
