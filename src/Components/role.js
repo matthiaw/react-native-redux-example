@@ -32,7 +32,7 @@ class RoleView extends Component {
       // call getValue() to get the values of the form
       var formValues = this.refs.form.getValue();
       if (formValues) { // if validation fails, value will be null
-        console.log(formValues); // value here is an instance of Person
+        console.log(formValues); // instance of form-values
 
         var docRef = db.collection("roles").doc(`${formValues.id}`);
 
@@ -46,11 +46,6 @@ class RoleView extends Component {
 
       }
       navigation.setParams(formValues);
-
-
-    /*  var setWithOptions = r.set({
-        capital: false
-      }, { merge: true });*/
 
     }
 
