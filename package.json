@@ -12,6 +12,7 @@
 	"dependencies": {
 		"expo": "^23.0.4",
 		"firebase": "^4.9.0",
+		"lodash": "^4.17.4",
 		"react": "16.0.0",
 		"react-native": "0.50.3",
 		"react-native-remote-svg": "^1.0.1",

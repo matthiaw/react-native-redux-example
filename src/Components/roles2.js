@@ -78,7 +78,7 @@ export default class Empty extends Component {
   // https://console.firebase.google.com/u/0/project/circlead-f1cab/database/firestore/data~2Froles~2FNOa1SiMVzXgzpYL0upvg
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "blue" }}>
+      <View style={{ flex: 1 }}>
         <ListView
             dataSource={this.state.dataSource}
             renderRow={item => this.renderItem(item, this.props.navigation)} />

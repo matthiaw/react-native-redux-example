@@ -4,18 +4,25 @@ import { NavigationActions, SafeAreaView } from "react-navigation";
 import Styles from "./../../App.scss";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Firebase from "./../Util/database";
-var db = Firebase.firestore();
-
 var t = require('tcomb-form-native');
+var db = Firebase.firestore();
 var Form = t.form.Form;
+var lodash = require('lodash');
+
+const stylesheet = lodash.cloneDeep(Form.stylesheet);
+
+// See https://github.com/gcanti/tcomb-form-native/blob/master/lib/templates/bootstrap/textbox.js
+stylesheet.controlLabel.normal = Styles.ci_formLabel;
+
+const options = {
+  stylesheet: stylesheet
+};
 
 var RoleForm = t.struct({
-  id: t.String,
-  label: t.String,              // a required string
+  // Id is hidden, because it should not be editable
+  label: t.String,                // a required string
   description: t.maybe(t.String)  // an optional string
 });
-
-var formOptions = {}; // optional rendering options (see documentation)
 
 class RoleView extends Component {
 
@@ -29,26 +36,29 @@ class RoleView extends Component {
     const params = navigation.state.params;
 
     if (params.mode === 'edit') {
-      // call getValue() to get the values of the form
-      var formValues = this.refs.form.getValue();
+      var formValues = this.refs.form.getValue(); // get values from form
       if (formValues) { // if validation fails, value will be null
-        console.log(formValues); // instance of form-values
+        // get correct dataset from cloud
+        var docRef = db.collection("roles").doc(`${params.id}`);
 
-        var docRef = db.collection("roles").doc(`${formValues.id}`);
-
+        // set data from form
         var data = {
           label: `${formValues.label}`,
           description: `${formValues.description}`,
-          id: `${formValues.id}`
+          id: `${params.id}`
         };
 
+        // Update cloud-document
         docRef.update(data);
 
       }
+
+      // set navigation-params to actual values
       navigation.setParams(formValues);
 
     }
 
+    // switch the edit-mode
     navigation.setParams({ mode: params.mode === 'edit' ? '' : 'edit' })
   }
 
@@ -59,21 +69,24 @@ class RoleView extends Component {
       let viewMode = null;
 
       if (params.mode === 'edit') {
-        viewMode = <View>
-          <Text>{params.id}</Text>
+        // View to Edit the role
+        viewMode = <View style={Styles.ci_formContainer}>
           <Form
             ref="form"
             type={RoleForm}
-            options={formOptions}
+            options={options}
             value={params}
           />
-
         </View>
       } else {
+        // View to show the role
         viewMode =
-          <View>
+          <View style={Styles.ci_formContainer}>
+            <Text style={Styles.ci_formLabel}>ID</Text>
             <Text>{params.id}</Text>
+            <Text style={Styles.ci_formLabel}>Label</Text>
             <Text>{params.label}</Text>
+            <Text style={Styles.ci_formLabel}>Description</Text>
             <Text>{params.description}</Text>
           </View>
       }
@@ -113,6 +126,5 @@ class RoleView extends Component {
       };
     };
 }
-
 
 export default RoleView;
