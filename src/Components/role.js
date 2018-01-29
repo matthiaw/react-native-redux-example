@@ -3,11 +3,14 @@ import { Text, View, TouchableOpacity, TouchableHighlight, ScrollView, StatusBar
 import { NavigationActions, SafeAreaView } from "react-navigation";
 import Styles from "./../../App.scss";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Firebase from "./../Util/database";
+var db = Firebase.firestore();
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
 var RoleForm = t.struct({
+  id: t.String,
   label: t.String,              // a required string
   description: t.maybe(t.String)  // an optional string
 });
@@ -22,19 +25,32 @@ class RoleView extends Component {
   }
 
   submitForm() {
-
     const navigation = this.props.navigation;
     const params = navigation.state.params;
 
     if (params.mode === 'edit') {
-      //console.log("Submit called");
       // call getValue() to get the values of the form
       var formValues = this.refs.form.getValue();
       if (formValues) { // if validation fails, value will be null
         console.log(formValues); // value here is an instance of Person
-      }
 
+        var docRef = db.collection("roles").doc(`${formValues.id}`);
+
+        var data = {
+          label: `${formValues.label}`,
+          description: `${formValues.description}`,
+          id: `${formValues.id}`
+        };
+
+        docRef.update(data);
+
+      }
       navigation.setParams(formValues);
+
+
+    /*  var setWithOptions = r.set({
+        capital: false
+      }, { merge: true });*/
 
     }
 
@@ -44,7 +60,7 @@ class RoleView extends Component {
   render() {
       const navigation = this.props.navigation;
       const params = navigation.state.params;
-  
+
       let viewMode = null;
 
       if (params.mode === 'edit') {
@@ -96,8 +112,7 @@ class RoleView extends Component {
               name= {params.mode === 'edit' ? 'save' : 'edit'}
               size={18}
               style={{ color: Styles.ci_Header.color, paddingHorizontal: 5}}
-              onPress={() => params.handleEdit()
-              }
+              onPress={() => params.handleEdit()}
             />
         ),
       };
