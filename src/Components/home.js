@@ -7,6 +7,8 @@ import Styles from "./../../App.scss";
 const Uuid = require('uuid/v1');
 import Item from "./item";
 
+const componentName = 'home';
+
 var renderData = JSON.parse(`{
     "entries": [
       {
@@ -46,6 +48,18 @@ class HomeView extends Component {
     },
     headerLeft: <Image source={require('./../../assets/logo.svg')} />
   };
+
+  componentWillUpdate(nextProps, nextState) {
+    //console.log('Will Update '+componentName);
+  }
+
+  componentDidMount() {
+    //console.log('Did Mount '+componentName);
+  }
+
+  componentWillUnmount() {
+     //console.log('Will Unmount '+componentName);
+   }
 
   renderItem(item, navigation) {
     return (
