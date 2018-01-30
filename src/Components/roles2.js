@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ListView, StatusBar, ScrollView } from "react-native";
+import { Text, View, TouchableHighlight, TouchableOpacity, ListView, StatusBar, ScrollView, StyleSheet } from "react-native";
 import Styles from "./../../App.scss";
 import Firebase from "./../Util/database";
 import Item from "./item";
@@ -19,11 +19,14 @@ export default class Empty extends Component {
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
     this.state = {
-      dataSource: this.ds.cloneWithRows(list)
+      dataSource: this.ds.cloneWithRows(list),
+  //    roleAdded: ''
     };
 
     this.roles = db.collection("roles").get();
     this.renderItem = this.renderItem.bind(this)
+    this.addRole = this.addRole.bind(this);
+    this.setItemsFromFirestore = this.setItemsFromFirestore.bind(this);
   }
 
   setItemsFromFirestore(roles) {
@@ -42,6 +45,25 @@ export default class Empty extends Component {
         dataSource: this.ds.cloneWithRows(items)
       });
     });
+  }
+
+
+  addRole() {
+    const id = `${Uuid()}`;
+    var data = {
+      id: {id},
+      label: 'Neue Rolle',
+      description: ''
+    };
+
+    var setDoc = db.collection('roles').doc(id).set(data);
+
+//    this.setState({roleAdded: 'new'});
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    this.roles = db.collection("roles").get();
+    this.setItemsFromFirestore(this.roles);
   }
 
   componentDidMount() {
@@ -82,8 +104,30 @@ export default class Empty extends Component {
         <ListView
             dataSource={this.state.dataSource}
             renderRow={item => this.renderItem(item, this.props.navigation)} />
+        <TouchableHighlight style={styles.button} onPress={this.addRole} underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>Add</Text>
+        </TouchableHighlight>
         <StatusBar barStyle="light-content" />
       </View>
     );
   }
+
 }
+
+  var styles = StyleSheet.create({
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    margin: 5,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  }
+});

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ScrollView, StatusBar } from "react-native";
+import { Text, View, TouchableHighlight, TouchableOpacity, ScrollView, StatusBar } from "react-native";
 import { NavigationActions, SafeAreaView } from "react-navigation";
 import Styles from "./../../App.scss";
 import { connect } from "react-redux";
