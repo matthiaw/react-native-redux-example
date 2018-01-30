@@ -32,6 +32,11 @@ var renderData = JSON.parse(`{
 
 class HomeView extends Component {
 
+  constructor(props) {
+    super(props);
+    this.renderItem = this.renderItem.bind(this);
+  }
+
   static navigationOptions = {
     title: "Circlead",
     headerTintColor: Styles.ci_Header.color,

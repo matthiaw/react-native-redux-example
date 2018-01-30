@@ -4,6 +4,7 @@ import Styles from "./../../App.scss";
 import Firebase from "./../Util/database";
 import Item from "./item";
 const Uuid = require('uuid/v1');
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationActions, SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 
@@ -20,12 +21,10 @@ export default class Empty extends Component {
 
     this.state = {
       dataSource: this.ds.cloneWithRows(list),
-  //    roleAdded: ''
     };
 
     this.roles = db.collection("roles").get();
     this.renderItem = this.renderItem.bind(this)
-    this.addRole = this.addRole.bind(this);
     this.setItemsFromFirestore = this.setItemsFromFirestore.bind(this);
   }
 
@@ -42,23 +41,9 @@ export default class Empty extends Component {
       });
 
       this.setState({
-        dataSource: this.ds.cloneWithRows(items)
+        dataSource: this.ds.cloneWithRows(items),
       });
     });
-  }
-
-
-  addRole() {
-    const id = `${Uuid()}`;
-    var data = {
-      id: {id},
-      label: 'Neue Rolle',
-      description: ''
-    };
-
-    var setDoc = db.collection('roles').doc(id).set(data);
-
-//    this.setState({roleAdded: 'new'});
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -88,13 +73,34 @@ export default class Empty extends Component {
     )
   }
 
-  static navigationOptions = {
+  static navigationOptions = props => {
+    const { navigation } = props;
+    const { state, setParams } = navigation;
+    const { params } = state;
+    return {
     title: "Rollen (Cloud)",
     headerTintColor: Styles.ci_Header.color,
     headerStyle: {
       height: Styles.ci_Header.height,
       backgroundColor: Styles.ci_Header.backgroundColor
-    }
+    },
+    headerRight: (
+        <FontAwesome
+          name= {'plus'}
+          size={18}
+          style={{ color: Styles.ci_Header.color, paddingHorizontal: 5}}
+          onPress={() => {
+            const id = `${Uuid()}`;
+            var data = {
+              id: {id},
+              label: `Neue Rolle (${id.substring(0,6)}...)`,
+              description: ''
+            };
+            var setDoc = db.collection('roles').doc(id).set(data);
+          }}
+        />
+    )
+  };
   };
 
   // https://console.firebase.google.com/u/0/project/circlead-f1cab/database/firestore/data~2Froles~2FNOa1SiMVzXgzpYL0upvg
@@ -104,30 +110,9 @@ export default class Empty extends Component {
         <ListView
             dataSource={this.state.dataSource}
             renderRow={item => this.renderItem(item, this.props.navigation)} />
-        <TouchableHighlight style={styles.button} onPress={this.addRole} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>Add</Text>
-        </TouchableHighlight>
         <StatusBar barStyle="light-content" />
       </View>
     );
   }
 
 }
-
-  var styles = StyleSheet.create({
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    margin: 5,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  }
-});

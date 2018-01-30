@@ -29,6 +29,7 @@ class RoleView extends Component {
   constructor(props) {
     super(props);
     this.submitForm = this.submitForm.bind(this);
+    this.removeRole = this.removeRole.bind(this);
   }
 
   submitForm() {
@@ -62,6 +63,16 @@ class RoleView extends Component {
     navigation.setParams({ mode: params.mode === 'edit' ? '' : 'edit' })
   }
 
+  removeRole() {
+    const navigation = this.props.navigation;
+    const params = navigation.state.params;
+
+    const id = `${params.id}`;
+    var deleteDoc = db.collection('roles').doc(id).delete();
+
+    navigation.goBack();
+  }
+
   render() {
       const navigation = this.props.navigation;
       const params = navigation.state.params;
@@ -77,6 +88,9 @@ class RoleView extends Component {
             options={options}
             value={params}
           />
+          <TouchableHighlight style={styles.button} onPress={this.removeRole} underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>Delete</Text>
+          </TouchableHighlight>
         </View>
       } else {
         // View to show the role
@@ -126,5 +140,23 @@ class RoleView extends Component {
       };
     };
 }
+
+var styles = StyleSheet.create({
+buttonText: {
+  fontSize: 18,
+  color: 'white',
+  alignSelf: 'center'
+},
+button: {
+  height: 36,
+  backgroundColor: '#48BBEC',
+  borderColor: '#48BBEC',
+  borderWidth: 1,
+  borderRadius: 8,
+  margin: 5,
+  alignSelf: 'stretch',
+  justifyContent: 'center'
+}
+});
 
 export default RoleView;
